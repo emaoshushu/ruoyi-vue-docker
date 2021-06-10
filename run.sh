@@ -9,3 +9,7 @@ sudo docker run --rm -d --name mysql-server -v "$(pwd)"/sql:/docker-entrypoint-i
 sudo docker run --rm -d --name redis-server --network ruoyi-net -d redis:6.2.4-alpine redis-server --appendonly yes
 
 sudo docker run --rm -d --name ruoyi-appserv --network ruoyi-net -e REDIS_HOST=redis-server -e MYSQL_URL=jdbc:mysql://mysql-server/ruoyi -e MYSQL_USER=root -e MYSQL_PASSWORD=root -p 8080:8080 ruoyi-vue-preview
+
+sudo docker build -t ruoyi-vue-frontend-preview -f ./ruoyi-ui/Dockerfile ./ruoyi-ui
+
+sudo docker run --rm -d --name ruoyi-vue --network ruoyi-net -e RUOYI_APP_SERV=ruoyi-appserv -p 8081:8081 ruoyi-vue-frontend-preview
