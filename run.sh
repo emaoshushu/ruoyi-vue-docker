@@ -4,7 +4,7 @@ sudo docker build -t ruoyi-vue-preview .
 sudo docker network create ruoyi-net
 # todo docker网络部门文档查看
 
-sudo docker run --rm -d --name mysql-server -v "$(pwd)"/sql:/docker-entrypoint-initdb.d --network ruoyi-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ruoyi mysql:8.0.23
+sudo docker run --rm -d --name mysql-server -v "$(pwd)"/sql:/docker-entrypoint-initdb.d --network ruoyi-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ruoyi -e LANG=C.UTF-8 mysql:8.0.23 --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
 
 sudo docker run --rm -d --name redis-server --network ruoyi-net -d redis:6.2.4-alpine redis-server --appendonly yes
 
